@@ -1,4 +1,4 @@
-package com.example.mobile_test
+package com.example.mobile_test.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,8 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.mobile_test.ui.theme.MobiletestTheme
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.mobile_test.presentation.theme.MobiletestTheme
+import com.example.mobile_test.presentation.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +24,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             MobiletestTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    val viewModel: MainViewModel = hiltViewModel()
+                    viewModel.getSeeds()
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
