@@ -24,7 +24,7 @@ fun AppNavigation(
         }
 
         composable(AppRoutes.QR_SCREEN) {
-            QRScreen(viewModel)
+            QRScreen(viewModel, navController)
         }
     }
 }
