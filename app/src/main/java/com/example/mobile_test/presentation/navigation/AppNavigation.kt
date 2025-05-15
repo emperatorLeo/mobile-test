@@ -1,12 +1,15 @@
 package com.example.mobile_test.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mobile_test.presentation.navigation.AppRoutes.HOME_SCREEN
 import com.example.mobile_test.presentation.screen.HomeScreen
 import com.example.mobile_test.presentation.screen.QRScreen
+import com.example.mobile_test.presentation.screen.ScanScreen
 import com.example.mobile_test.presentation.viewmodel.MainViewModel
 
 @Composable
@@ -24,7 +27,15 @@ fun AppNavigation(
         }
 
         composable(AppRoutes.QR_SCREEN) {
-            QRScreen(viewModel, navController)
+            LaunchedEffect(Unit) {
+                viewModel.getSeeds()
+            }
+            QRScreen(viewModel.uiState.collectAsState(), navController)
         }
+
+        composable(AppRoutes.SCAN_SCREEN) {
+            ScanScreen()
+        }
+
     }
 }

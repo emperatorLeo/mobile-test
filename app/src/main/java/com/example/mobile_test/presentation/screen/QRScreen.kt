@@ -10,8 +10,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,19 +21,12 @@ import com.example.mobile_test.presentation.components.QRCodeShimmer
 import com.example.mobile_test.presentation.states.UiState
 import com.example.mobile_test.presentation.theme.Purple40
 import com.example.mobile_test.presentation.theme.Purple80
-import com.example.mobile_test.presentation.viewmodel.MainViewModel
 import qrgenerator.QRCodeImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QRScreen(viewModel: MainViewModel, navigation: NavController) {
+fun QRScreen(uiState: State<UiState>, navigation: NavController) {
     val context = LocalContext.current
-
-    LaunchedEffect(Unit) {
-        viewModel.getSeeds()
-    }
-
-    val state = viewModel.uiState.collectAsState()
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -47,10 +39,10 @@ fun QRScreen(viewModel: MainViewModel, navigation: NavController) {
             title = { Text("QR Screen") },
             modifier = Modifier.align(Alignment.TopCenter)
         )
-        when (state.value) {
+        when (uiState.value) {
             is UiState.Success -> {
                 QRCodeImage(
-                    url = "${BuildConfig.BASE_URL}/${(state.value as UiState.Success).seed.seed}",
+                    url = "${BuildConfig.BASE_URL}/${(uiState.value as UiState.Success).seed.seed}",
                     contentDescription = "go to item",
                     modifier = Modifier.align(Alignment.Center),
                     onFailure = {
@@ -58,11 +50,11 @@ fun QRScreen(viewModel: MainViewModel, navigation: NavController) {
                             .show()
                     }
                 )
-                Log.d("QR Success","Url: ${BuildConfig.BASE_URL}/${(state.value as UiState.Success).seed.seed}")
+                Log.d("QR Success","Url: ${BuildConfig.BASE_URL}/${(uiState.value as UiState.Success).seed.seed}")
             }
 
             is UiState.Error -> {
-                OnErrorAction(state.value as UiState.Error)
+                OnErrorAction(uiState.value as UiState.Error)
                 navigation.popBackStack()
             }
 
