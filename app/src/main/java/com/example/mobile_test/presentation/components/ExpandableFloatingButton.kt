@@ -33,8 +33,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.mobile_test.R
 import com.example.mobile_test.presentation.navigation.AppRoutes
 import com.example.mobile_test.presentation.theme.Purple40
 import com.example.mobile_test.presentation.theme.Purple80
@@ -51,8 +53,16 @@ fun ExpandableFloatingButton(navController: NavController) {
 
         val fabItems =
             listOf(
-                FabItems(Icons.Filled.Call, "Scan", route = AppRoutes.SCAN_SCREEN),
-                FabItems(Icons.Filled.Settings, "Generate", route = AppRoutes.QR_SCREEN)
+                FabItems(
+                    Icons.Filled.Call,
+                    stringResource(R.string.scan_option),
+                    route = AppRoutes.SCAN_SCREEN
+                ),
+                FabItems(
+                    Icons.Filled.Settings,
+                    stringResource(R.string.generate_option),
+                    route = AppRoutes.QR_SCREEN
+                )
             )
         AnimatedVisibility(
             visible = isExpanded,
@@ -70,7 +80,9 @@ fun ExpandableFloatingButton(navController: NavController) {
 
         FloatingActionButton(
             onClick = { isExpanded = !isExpanded },
-            modifier = Modifier.rotate(rotation).padding(top = 10.dp),
+            modifier = Modifier
+                .rotate(rotation)
+                .padding(top = 10.dp),
             containerColor = Purple80,
             contentColor = Purple40
         ) {
@@ -86,9 +98,11 @@ private fun ItemUi(item: FabItems, onItemClicked: (String) -> Unit) {
         horizontalArrangement = Arrangement.End,
         modifier = Modifier.clickable { onItemClicked(item.route) }) {
         Text(item.label, modifier = Modifier.padding(end = 5.dp))
-        SmallFloatingActionButton(onClick = {onItemClicked(item.route)},
+        SmallFloatingActionButton(
+            onClick = { onItemClicked(item.route) },
             containerColor = Purple80,
-            contentColor = Purple40) {
+            contentColor = Purple40
+        ) {
             Icon(item.icon, "")
         }
     }

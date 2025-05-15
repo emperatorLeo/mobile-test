@@ -23,9 +23,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.navigation.NavController
+import com.example.mobile_test.R
 import com.example.mobile_test.presentation.theme.Purple40
 import com.example.mobile_test.presentation.theme.Purple80
 import kotlinx.coroutines.launch
@@ -40,6 +42,7 @@ fun ScanScreen(navController: NavController) {
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
     val showMessage = remember { mutableStateOf(false) }
+    val invalidMessage = stringResource(R.string.invalid_qr_code)
 
     Box(
         modifier = Modifier
@@ -51,7 +54,7 @@ fun ScanScreen(navController: NavController) {
                 containerColor = Purple80,
                 titleContentColor = Purple40
             ),
-            title = { Text("Scan Screen") },
+            title = { Text(stringResource( R.string.scan_screen_title)) },
             modifier = Modifier.align(Alignment.TopCenter)
         )
         QrScanner(
@@ -68,7 +71,7 @@ fun ScanScreen(navController: NavController) {
             onFailure = {
                 coroutineScope.launch {
                     if (it.isEmpty()) {
-                        message.value = "Invalid qr code"
+                        message.value = invalidMessage
                     } else {
                         message.value = it
                     }
@@ -82,7 +85,7 @@ fun ScanScreen(navController: NavController) {
             }
         )
         if (showMessage.value) {
-            Toast.makeText(context, "Scan something", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, message.value, Toast.LENGTH_SHORT).show()
         }
     }
 }

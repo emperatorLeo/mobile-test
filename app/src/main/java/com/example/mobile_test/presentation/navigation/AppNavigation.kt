@@ -34,7 +34,7 @@ fun AppNavigation(
         }
 
         composable(AppRoutes.SCAN_SCREEN) {
-            ScanScreen()
+            ScanScreen(navController)
         }
 
     }

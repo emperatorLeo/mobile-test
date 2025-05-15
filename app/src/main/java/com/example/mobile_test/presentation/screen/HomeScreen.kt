@@ -10,7 +10,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import com.example.mobile_test.R
 import com.example.mobile_test.presentation.components.ExpandableFloatingButton
 import com.example.mobile_test.presentation.theme.Purple40
 import com.example.mobile_test.presentation.theme.Purple80
@@ -26,7 +28,7 @@ fun HomeScreen(navController: NavController) {
                     containerColor = Purple80,
                     titleContentColor =  Purple40
                 ),
-                title = { Text("Home Screen") })
+                title = { Text(stringResource(R.string.home_screen_title)) })
         },
         floatingActionButton = {
             ExpandableFloatingButton(navController)

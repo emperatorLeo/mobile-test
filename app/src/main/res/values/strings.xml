@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">mobile-test</string>
+    <string name="home_screen_title">Home Screen</string>
+    <string name="scan_option">Scan</string>
+    <string name="generate_option">Generate</string>
+    <string name="qr_screen_title">QR Screen</string>
+    <string name="scan_screen_title">Scan Screen</string>
+    <string name="invalid_qr_code">Invalid qr code</string>
+
 </resources>

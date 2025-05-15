@@ -15,8 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.example.mobile_test.BuildConfig
+import com.example.mobile_test.R
 import com.example.mobile_test.presentation.components.QRCodeShimmer
 import com.example.mobile_test.presentation.states.UiState
 import com.example.mobile_test.presentation.theme.Purple40
@@ -36,7 +38,7 @@ fun QRScreen(uiState: State<UiState>, navigation: NavController) {
                 containerColor = Purple80,
                 titleContentColor = Purple40
             ),
-            title = { Text("QR Screen") },
+            title = { Text(stringResource(R.string.qr_screen_title)) },
             modifier = Modifier.align(Alignment.TopCenter)
         )
         when (uiState.value) {
