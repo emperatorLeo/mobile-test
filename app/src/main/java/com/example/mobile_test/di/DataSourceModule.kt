@@ -1,8 +1,11 @@
 package com.example.mobile_test.di
 
 import com.example.mobile_test.BuildConfig.BASE_URL
+import com.example.mobile_test.data.datasource.DataSource
 import com.example.mobile_test.data.interceptor.FormulaInterceptor
 import com.example.mobile_test.data.remote.SeedService
+import com.example.mobile_test.data.repository.Repository
+import com.example.mobile_test.data.repository.RepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,5 +40,10 @@ object DataSourceModule {
     @Provides
     fun provideSeedService(retrofit: Retrofit): SeedService {
         return retrofit.create(SeedService::class.java)
+    }
+
+    @Provides
+    fun provideRepository(dataSource: DataSource): Repository {
+        return RepositoryImp(dataSource)
     }
 }

@@ -65,20 +65,23 @@ dependencies {
     implementation(libs.androidx.material3)
 
     // Retrofit
-    api(libs.retrofit)
-    api(libs.gson.converter)
+    implementation(libs.retrofit)
+    implementation(libs.gson.converter)
 
     // Okhttp
-    api(libs.okhttp)
-    api(libs.okhttp.logging.interceptor)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
 
     // Gson
-    api(libs.gson)
+    implementation(libs.gson)
 
     // Hilt
-    api(libs.hilt)
-    api(libs.hilt.navigation)
+    implementation(libs.hilt)
+    implementation(libs.hilt.navigation)
     kapt(libs.hilt.kapt)
+
+    // Arrow
+    implementation(libs.arrow)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
