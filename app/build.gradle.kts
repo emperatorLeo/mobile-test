@@ -83,6 +83,9 @@ dependencies {
     // Arrow
     implementation(libs.arrow)
 
+    // QrGenerator
+    implementation(libs.qr.kit)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

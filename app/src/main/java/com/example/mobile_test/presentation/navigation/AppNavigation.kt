@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mobile_test.presentation.navigation.AppRoutes.HOME_SCREEN
 import com.example.mobile_test.presentation.screen.HomeScreen
+import com.example.mobile_test.presentation.screen.QRScreen
 import com.example.mobile_test.presentation.viewmodel.MainViewModel
 
 @Composable
@@ -20,6 +21,10 @@ fun AppNavigation(
 
         composable(HOME_SCREEN) {
             HomeScreen(navController)
+        }
+
+        composable(AppRoutes.QR_SCREEN) {
+            QRScreen(viewModel)
         }
     }
 }

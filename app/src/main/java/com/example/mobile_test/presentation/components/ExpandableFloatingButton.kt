@@ -77,8 +77,6 @@ fun ExpandableFloatingButton(navController: NavController) {
             Icon(Icons.Filled.Add, "")
         }
     }
-
-
 }
 
 @Composable
@@ -88,7 +86,7 @@ private fun ItemUi(item: FabItems, onItemClicked: (String) -> Unit) {
         horizontalArrangement = Arrangement.End,
         modifier = Modifier.clickable { onItemClicked(item.route) }) {
         Text(item.label, modifier = Modifier.padding(end = 5.dp))
-        SmallFloatingActionButton(onClick = {},
+        SmallFloatingActionButton(onClick = {onItemClicked(item.route)},
             containerColor = Purple80,
             contentColor = Purple40) {
             Icon(item.icon, "")
