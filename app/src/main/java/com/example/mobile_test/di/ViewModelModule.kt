@@ -1,7 +1,7 @@
 package com.example.mobile_test.di
 
-import com.example.mobile_test.data.remote.SeedService
 import com.example.mobile_test.presentation.viewmodel.MainViewModel
+import com.example.mobile_test.usecase.GetSeedUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,7 +12,7 @@ import dagger.hilt.android.components.ViewModelComponent
 object ViewModelModule {
 
     @Provides
-    fun provideMainViewModel(seedService: SeedService): MainViewModel {
-        return MainViewModel(seedService)
+    fun provideMainViewModel(getSeedUseCase: GetSeedUseCase): MainViewModel {
+        return MainViewModel(getSeedUseCase)
     }
 }
