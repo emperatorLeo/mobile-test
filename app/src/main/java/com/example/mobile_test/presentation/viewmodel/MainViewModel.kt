@@ -1,6 +1,5 @@
 package com.example.mobile_test.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mobile_test.presentation.states.UiState
@@ -21,13 +20,11 @@ class MainViewModel @Inject constructor(
 
     fun getSeeds() {
         _uiState.value = UiState.Loading
-        Log.d("Leo","Loading")
         viewModelScope.launch {
             getSeedUseCase().collect { response ->
                 response.fold({
                     _uiState.value = UiState.Error(it.message ?: "error")
                 }, {
-                    Log.d("Leo","Success")
                     _uiState.value = UiState.Success(it)
                 })
             }
