@@ -16,6 +16,9 @@ hiltNavigationVersion = "1.2.0"
 okhttpVersion = "4.12.0"
 kspVersion = "2.0.21-1.0.27"
 arrowVersion = "1.1.2"
+mockk-version = "1.13.6"
+coroutines-test-version = "1.9.0"
+androidx-arch-version = "2.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +45,9 @@ hilt-kapt = { group = "com.google.dagger", name = "hilt-android-compiler", versi
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
 arrow = { group = "io.arrow-kt", name = "arrow-core", version.ref = "arrowVersion" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk-version" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test-version" }
+androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidx-arch-version" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
