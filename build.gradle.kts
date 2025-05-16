@@ -5,4 +5,9 @@ plugins {
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.hilt.plugin) apply false
     alias(libs.plugins.ksp.plugin) apply false
+    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
+}
+
+ktlint {
+    version.set("0.49.1")
 }
