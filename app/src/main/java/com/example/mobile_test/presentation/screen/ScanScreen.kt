@@ -36,13 +36,14 @@ import qrscanner.QrScanner
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScanScreen(navController: NavController) {
-    val message = remember { mutableStateOf("") }
     val flashlightOn by remember { mutableStateOf(false) }
-    var openImagePicker by remember { mutableStateOf(value = false) }
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
-    val showMessage = remember { mutableStateOf(false) }
     val invalidMessage = stringResource(R.string.invalid_qr_code)
+
+    var message by remember { mutableStateOf("") }
+    var openImagePicker by remember { mutableStateOf(value = false) }
+    var showMessage by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -65,17 +66,17 @@ fun ScanScreen(navController: NavController) {
                 .align(Alignment.Center),
             flashlightOn = flashlightOn,
             onCompletion = {
+                message = it
                 val intent = Intent(Intent.ACTION_VIEW, it.toUri())
+                showMessage = true
                 context.startActivity(intent, null)
             },
             onFailure = {
                 coroutineScope.launch {
-                    if (it.isEmpty()) {
-                        message.value = invalidMessage
-                    } else {
-                        message.value = it
+                    message = it.ifEmpty {
+                        invalidMessage
                     }
-                    showMessage.value = true
+                    showMessage = true
                     navController.popBackStack()
                 }
             },
@@ -84,8 +85,8 @@ fun ScanScreen(navController: NavController) {
                 openImagePicker = it
             }
         )
-        if (showMessage.value) {
-            Toast.makeText(context, message.value, Toast.LENGTH_SHORT).show()
+        if (showMessage) {
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         }
     }
 }

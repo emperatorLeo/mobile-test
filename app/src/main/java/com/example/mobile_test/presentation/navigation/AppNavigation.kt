@@ -17,6 +17,7 @@ fun AppNavigation(
     viewModel: MainViewModel
 ) {
     val navController = rememberNavController()
+
     NavHost(
         navController = navController,
         startDestination = HOME_SCREEN
@@ -30,7 +31,9 @@ fun AppNavigation(
             LaunchedEffect(Unit) {
                 viewModel.getSeeds()
             }
-            QRScreen(viewModel.uiState.collectAsState(), navController)
+            QRScreen(viewModel.uiState.collectAsState(), navController) {
+                viewModel.getSeeds()
+            }
         }
 
         composable(AppRoutes.SCAN_SCREEN) {
