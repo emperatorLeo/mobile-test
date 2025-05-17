@@ -21,4 +21,3 @@
 
 + Format and Lint the code using Ktlint and Android Lint
 + Unit test written with Mockk
-+ UI Testing using Jetpack Compose
