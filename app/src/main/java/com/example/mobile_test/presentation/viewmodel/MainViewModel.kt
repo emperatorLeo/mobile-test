@@ -11,23 +11,24 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    private val getSeedUseCase: GetSeedUseCase
-) : ViewModel() {
+class MainViewModel
+    @Inject
+    constructor(
+        private val getSeedUseCase: GetSeedUseCase,
+    ) : ViewModel() {
+        private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
+        val uiState get() = _uiState.asStateFlow()
 
-    private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
-    val uiState get() = _uiState.asStateFlow()
-
-    fun getSeeds() {
-        _uiState.value = UiState.Loading
-        viewModelScope.launch {
-            getSeedUseCase().collect { response ->
-                response.fold({
-                    _uiState.value = UiState.Error(it.message ?: "error")
-                }, {
-                    _uiState.value = UiState.Success(it)
-                })
+        fun getSeeds() {
+            _uiState.value = UiState.Loading
+            viewModelScope.launch {
+                getSeedUseCase().collect { response ->
+                    response.fold({
+                        _uiState.value = UiState.Error(it.message ?: "error")
+                    }, {
+                        _uiState.value = UiState.Success(it)
+                    })
+                }
             }
         }
     }
-}

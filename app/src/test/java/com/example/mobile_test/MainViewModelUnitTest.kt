@@ -24,8 +24,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class ExampleUnitTest {
-
+class MainViewModelUnitTest {
     @RelaxedMockK
     private lateinit var getSeedUseCase: GetSeedUseCase
 
@@ -55,7 +54,6 @@ class ExampleUnitTest {
             val mockedFlow = flow<Either<Error, SeedDto>> { emit(mockedSeed.right()) }
             coEvery { getSeedUseCase.invoke() } returns mockedFlow
 
-
             // WHEN
             viewModel.getSeeds()
 
@@ -71,7 +69,6 @@ class ExampleUnitTest {
             val mockerError = Error("Error")
             val mockedFlow = flow<Either<Error, SeedDto>> { emit(mockerError.left()) }
             coEvery { getSeedUseCase.invoke() } returns mockedFlow
-
 
             // WHEN
             viewModel.getSeeds()

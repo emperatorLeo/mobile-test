@@ -45,7 +45,6 @@ import com.example.mobile_test.presentation.theme.Purple80
 fun ExpandableFloatingButton(navController: NavController) {
     var isExpanded by remember { mutableStateOf(false) }
     Column(horizontalAlignment = Alignment.End) {
-
         val transition = updateTransition(targetState = isExpanded, label = "transition")
         val rotation by transition.animateFloat(label = "rotation") {
             if (it) 300f else 0f
@@ -56,18 +55,18 @@ fun ExpandableFloatingButton(navController: NavController) {
                 FabItems(
                     Icons.Filled.Call,
                     stringResource(R.string.scan_option),
-                    route = AppRoutes.SCAN_SCREEN
+                    route = AppRoutes.SCAN_SCREEN,
                 ),
                 FabItems(
                     Icons.Filled.Settings,
                     stringResource(R.string.generate_option),
-                    route = AppRoutes.QR_SCREEN
-                )
+                    route = AppRoutes.QR_SCREEN,
+                ),
             )
         AnimatedVisibility(
             visible = isExpanded,
             enter = fadeIn() + slideInVertically(initialOffsetY = { it }) + expandVertically(),
-            exit = fadeOut() + slideOutVertically(targetOffsetY = { it }) + shrinkVertically()
+            exit = fadeOut() + slideOutVertically(targetOffsetY = { it }) + shrinkVertically(),
         ) {
             LazyColumn(horizontalAlignment = Alignment.End) {
                 items(fabItems) {
@@ -80,11 +79,12 @@ fun ExpandableFloatingButton(navController: NavController) {
 
         FloatingActionButton(
             onClick = { isExpanded = !isExpanded },
-            modifier = Modifier
-                .rotate(rotation)
-                .padding(top = 10.dp),
+            modifier =
+                Modifier
+                    .rotate(rotation)
+                    .padding(top = 10.dp),
             containerColor = Purple80,
-            contentColor = Purple40
+            contentColor = Purple40,
         ) {
             Icon(Icons.Filled.Add, "")
         }
@@ -92,20 +92,28 @@ fun ExpandableFloatingButton(navController: NavController) {
 }
 
 @Composable
-private fun ItemUi(item: FabItems, onItemClicked: (String) -> Unit) {
+private fun ItemUi(
+    item: FabItems,
+    onItemClicked: (String) -> Unit,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End,
-        modifier = Modifier.clickable { onItemClicked(item.route) }) {
+        modifier = Modifier.clickable { onItemClicked(item.route) },
+    ) {
         Text(item.label, modifier = Modifier.padding(end = 5.dp))
         SmallFloatingActionButton(
             onClick = { onItemClicked(item.route) },
             containerColor = Purple80,
-            contentColor = Purple40
+            contentColor = Purple40,
         ) {
             Icon(item.icon, "")
         }
     }
 }
 
-data class FabItems(val icon: ImageVector, val label: String, val route: String)
+data class FabItems(
+    val icon: ImageVector,
+    val label: String,
+    val route: String,
+)
